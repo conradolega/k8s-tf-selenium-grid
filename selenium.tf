@@ -12,6 +12,8 @@ resource "kubernetes_service" "selenium" {
       port        = 80
       target_port = 4444
     }
+
+    type = "LoadBalancer"
   }
 }
 
