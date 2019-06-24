@@ -32,3 +32,46 @@ resource "kubernetes_pod" "selenium_hub" {
     }
   }
 }
+
+resource "kubernetes_deployment" "selenium_nodes" {
+  metadata {
+    name = "selenium"
+    labels {
+      app = "selenium-node"
+    }
+  }
+
+  spec {
+    replicas = 1
+
+    selector {
+      match_labels {
+        app = "selenium-node"
+      }
+    }
+
+    template {
+      metadata {
+        labels {
+          app = "selenium-node"
+        }
+      }
+
+      spec {
+        container {
+          image = "selenium/node-chrome:3.141.59-radium"
+          name  = "selenium-node"
+          env {
+            name  = "HUB_HOST"
+            value = "selenium"
+          }
+
+          env {
+            name  = "HUB_PORT"
+            value = "80"
+          }
+        }
+      }
+    }
+  }
+}
