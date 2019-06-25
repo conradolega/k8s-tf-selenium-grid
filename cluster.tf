@@ -8,5 +8,5 @@ resource "google_container_cluster" "selenium_grid" {
 resource "google_container_node_pool" "selenium" {
   name       = "selenium"
   cluster    = "${google_container_cluster.selenium_grid.name}"
-  node_count = 1
+  node_count = 2
 }

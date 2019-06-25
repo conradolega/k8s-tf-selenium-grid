@@ -42,7 +42,7 @@ resource "kubernetes_deployment" "selenium_nodes" {
   }
 
   spec {
-    replicas = 1
+    replicas = 3
 
     selector {
       match_labels {
